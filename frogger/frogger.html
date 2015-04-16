@@ -1,1 +1,28 @@
-i see no pages
+<html>
+<head>
+	<link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+	<script src="js/jquery.js"></script>
+	<script src="js/underscore.js"></script>
+	<script src="js/modules.js"></script>
+	<script src="js/game.js"></script>
+	<script src="js/frog.js"></script>
+	<script src="js/lane.js"></script>
+	<script src="js/car.js"></script>
+	<script src="js/lilipad.js"></script>
+	<script src="js/log.js"></script>
+	<script src="js/lilywin.js"></script>
+	<script src="js/life.js"></script>
+	<script src="js/fly.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<title></title>
+</head>
+<body>
+	<canvas id='game' width="1050" height="700"></canvas>
+	<script>
+		window.game = new Game();
+		window.onload = function () {
+			window.game.ready();
+		}
+	</script>
+</body>
+</html>
