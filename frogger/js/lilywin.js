@@ -1,3 +1,4 @@
+//landing on this lilpad is the objective of the game. it does not move.
 function LilyWin (xPos) {
 	this.y = 0
 	this.speed = 0

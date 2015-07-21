@@ -1,3 +1,4 @@
+//The log moves left to right and transports the frog in the river.
 function Log (lane, xPos, length) {
 	this.y = lane.y
 	this.speed = lane.speed
@@ -16,7 +17,8 @@ _.extend(Log.prototype, {
 		this.yPos = this.y * game.cellSize
 
 		c.save();
-
+		// the log is rendered using a rectangle and 2 circles.
+		// the length is reduced by half to give the circles an elliptical shape.
 		c.translate( this.xPos + game.cellSize/2, this.yPos + game.cellSize/2);
 		c.fillStyle = 'brown'
 		c.beginPath();

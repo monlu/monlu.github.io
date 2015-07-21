@@ -1,13 +1,20 @@
+// The basic properties of a frog.
 var Frog = function(cellSize){
+    // The starting position of the frog.
     this.x = 10;
     this.y = 13;
     this.xPos = this.x * cellSize
     this.yPos = this.y * cellSize
+
+    //size recorded for collision detection.
     this.width = 36
     this.height = 30
+
+    //direction the frog is facing.
     this.direction = Math.PI;
     this.cellSize = cellSize;
-    this.attached = false;
+
+    //booleans to see if frog is standing on an object in the river that is not lethal.
     this.transporting = false;
     this.unkillable = false
 }
@@ -15,6 +22,7 @@ var Frog = function(cellSize){
 _.extend(Frog.prototype, {
     render: function(ctx){
         var c = ctx;
+        //The coordinates of the frog image.
         var head = [2,5];
         var frog = [
             [2,5], [-2,5], [-2,4], [-3,4], 
@@ -51,6 +59,7 @@ _.extend(Frog.prototype, {
     c.restore();
     },
 
+    //if frog dies, resets to starting location and removes a life.
     dead: function() {
         var game = window.game
         this.x = 10;
@@ -58,7 +67,7 @@ _.extend(Frog.prototype, {
         this.xPos = this.x * this.cellSize
         this.yPos = this.y * this.cellSize
         this.direction = Math.PI;
-        game.scoreCeil = 14
+        game.scoreCeil = game.yHeight
         game.lives.splice((game.lives.length - 1), 1)
         console.log("life was lost")
     },
@@ -70,6 +79,7 @@ _.extend(Frog.prototype, {
         c.fillRect(this.bgColor);
     },
 
+    //moves the frog, also prevents the frog from moving off screen.
     moveUp: function() { 
         if (this.y > 0) { 
             this.y -= 1; this.direction = Math.PI; this.yPos = this.y * this.cellSize };
@@ -87,10 +97,12 @@ _.extend(Frog.prototype, {
         if (this.x < 20 ) { this.x += 1 ; this.direction = Math.PI / -2; this.xPos = this.x * this.cellSize };
     },
 
+    //moves the frog when it is standing on a lilypad or log.
     transport: function (obj) {
         if (this.collide(obj) == true) {
             this.x = (this.x*this.cellSize + obj.direction * obj.speed)/this.cellSize
             this.xPos = this.x * this.cellSize
+            //if the frog is moved off screen by these objects, it dies.
             if (this.x < 0 || this.x > 20) {
                 this.dead();
             }
